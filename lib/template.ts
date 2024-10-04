@@ -27,7 +27,7 @@ export const getFeaturedTemplates = unstable_cache(
     },
     [],
     {
-        revalidate: ms('1d') / 1000,
+        revalidate: ms('1m') / 1000,
     }
 )
 
@@ -52,7 +52,7 @@ export const getTemplates = unstable_cache(
     },
     [],
     {
-        revalidate: ms('1d') / 1000,
+        revalidate: ms('1m') / 1000,
     }
 )
 
@@ -74,6 +74,6 @@ export const getTemplate = unstable_cache(
     },
     [],
     {
-        revalidate: ms('1d') / 1000,
+        revalidate: ms('1m') / 1000,
     }
 )
