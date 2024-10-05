@@ -5,6 +5,7 @@ import handlers from './handlers'
 
 export interface Config extends BaseConfig {
     text: string
+    who:string
 }
 
 export interface Storage extends BaseStorage {}

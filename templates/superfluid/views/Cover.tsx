@@ -1,5 +1,5 @@
 import type { Config } from '..'
-function cover(){
+function Cover(){
     return ( <div style={{
         width: '1200px',
         height: '630px',
@@ -119,6 +119,82 @@ function Balance(){
 }
 export default function CoverView(config: Config) {
     return (
-       <Balance/>
+      <div
+      style={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ff0000',
+        backgroundImage: 'linear-gradient(to bottom, #ff0000, #800080, #000000)',
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '150px',
+            height: '150px',
+            borderRadius: '50%',
+            backgroundColor: '#800080',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '100px',
+              color: 'white',
+            }}
+          >
+            F
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: '40px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            color: 'white',
+            fontSize: '60px',
+            fontWeight: 'bold',
+          }}
+        >
+          Farcastles
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            color: 'white',
+            fontSize: '40px',
+            marginTop: '20px',
+          }}
+        >
+          click 'send' to send stream
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            color: 'white',
+            fontSize: '40px',
+            marginTop: '10px',
+          }}
+        >
+          click 'stream' to see latest stream
+        </div>
+      </div>
+    </div>
     )
 }
