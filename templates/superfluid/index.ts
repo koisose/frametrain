@@ -4,7 +4,7 @@ import cover from './cover.webp'
 import handlers from './handlers'
 
 export interface Config extends BaseConfig {
-    text: string
+  
     who:string
 }
 
@@ -22,7 +22,7 @@ export default {
     Inspector,
     handlers,
     initialConfig: {
-        text: 'Default Text',
+        who: 'yourself',
     },
     events: [],
 } satisfies BaseTemplate
