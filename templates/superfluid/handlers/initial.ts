@@ -19,7 +19,7 @@ export default async function initial({
     const roboto = await loadGoogleFontAllVariants('Roboto')
 
     return {
-        buttons: [{ label: 'Send' },{ label: 'Balance' }],
+        buttons: [{ label: 'send' },{ label: 'stream' }],
         fonts: roboto,
         component: CoverView(config),
         handler: 'page',

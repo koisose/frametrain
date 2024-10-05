@@ -1,54 +1,40 @@
 'use client'
-import { Button, Input } from '@/sdk/components'
+import { Button, Input,Select } from '@/sdk/components'
 import { useFrameConfig } from '@/sdk/hooks'
 import { Configuration } from '@/sdk/inspector'
-import { useRef } from 'react'
+import { useRef,useState } from 'react'
 import type { Config } from '.'
 
 export default function Inspector() {
     const [config, updateConfig] = useFrameConfig<Config>()
-
-    const { text } = config
+    const [username, setUsername] = useState("")
+    const { text,who } = config
 
     const displayLabelInputRef = useRef<HTMLInputElement>(null)
 
     return (
         <Configuration.Root>
-            <Configuration.Section title="Cover">
-                <p>{JSON.stringify(config)}</p>
-                <h2 className="text-lg font-semibold">Starter Template</h2>
+            <Configuration.Section title="Setting">
+                <h2 className="text-lg font-semibold">Set Farcaster Username</h2>
 
-                <h3 className="text-lg font-semibold">Text</h3>
-
-                <p>{text}</p>
-
-                <div className="flex flex-col gap-2 ">
-                    <Input
-                        className="text-lg"
-                        placeholder="Input something"
-                        ref={displayLabelInputRef}
-                    />
-                    <Button
-                        onClick={() => {
-                            if (!displayLabelInputRef.current?.value) return
-
-                            updateConfig({ text: displayLabelInputRef.current.value })
-
-                            displayLabelInputRef.current.value = ''
-                        }}
-                        className="w-full bg-border hover:bg-secondary-border text-primary"
-                    >
-                        Set Text
-                    </Button>
-                </div>
-
-                <Button
-                    variant="destructive"
-                    className="w-full "
-                    onClick={() => updateConfig({ text: '' })}
+                <Select
+                    defaultValue={config?.who || 'yourself'}
+                    onChange={(value) => {
+                        const who = value as 'yourself' | 'someone'
+                        updateConfig({ who })
+                    }}
                 >
-                    Delete
-                </Button>
+                    <option value="yourself">Yourself</option>
+                    <option value="someone">Someone else</option>
+                </Select>
+                {config.who==='someone' && <Input
+                        className="py-2 text-lg"
+                        placeholder="username"
+                        defaultValue={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />}
+                
+
             </Configuration.Section>
         </Configuration.Root>
     )
