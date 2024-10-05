@@ -1,16 +1,28 @@
 'use client'
-import { Button, Input,Select } from '@/sdk/components'
+import { Button, Input, Select } from '@/sdk/components'
 import { useFrameConfig } from '@/sdk/hooks'
 import { Configuration } from '@/sdk/inspector'
-import { useRef,useState } from 'react'
+import { getFarcasterProfiles } from './utils'
+import { useState,useEffect } from 'react'
 import type { Config } from '.'
 
 export default function Inspector() {
     const [config, updateConfig] = useFrameConfig<Config>()
     const [username, setUsername] = useState("")
-    const { text,who } = config
+    const { who } = config
 
-    const displayLabelInputRef = useRef<HTMLInputElement>(null)
+    useEffect(() => {
+        if (!config.slides) return
+        for (const slide of config.slides) {
+            const fonts = identifyFontsUsed(slide.textLayers)
+            for (const fontConfig of fonts) {
+                if (!loadedFonts.has(fontConfig.key)) {
+                    addGoogleFontIntoHtmlHead(fontConfig)
+                    loadedFonts.add(fontConfig.key)
+                }
+            }
+        }
+    }, [who])
 
     return (
         <Configuration.Root>
@@ -27,13 +39,13 @@ export default function Inspector() {
                     <option value="yourself">Yourself</option>
                     <option value="someone">Someone else</option>
                 </Select>
-                {config.who==='someone' && <Input
-                        className="py-2 text-lg"
-                        placeholder="username"
-                        defaultValue={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />}
-                
+                {config.who === 'someone' && <Input
+                    className="py-2 text-lg"
+                    placeholder="username"
+                    defaultValue={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />}
+
 
             </Configuration.Section>
         </Configuration.Root>
