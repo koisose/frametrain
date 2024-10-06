@@ -1,26 +1,23 @@
 'use client'
 import { Button, Input, Select } from '@/sdk/components'
-import { useFrameConfig } from '@/sdk/hooks'
+import type {  FarcasterUserInfo } from '@/lib/farcaster'
+import { useFrameConfig,useFarcasterId,useFarcasterName } from '@/sdk/hooks'
+import { getFarcasterProfiles } from '@/sdk/neynar'
 import { Configuration } from '@/sdk/inspector'
-import { getFarcasterProfiles } from './utils'
 import { useState,useEffect } from 'react'
 import type { Config } from '.'
 
 export default function Inspector() {
     const [config, updateConfig] = useFrameConfig<Config>()
     const [username, setUsername] = useState("")
+    const [allUser,setAllUser]=useState<FarcasterUserInfo[]>([])
+    const farId=useFarcasterId()
+    const farName=useFarcasterName()
     const { who } = config
 
     useEffect(() => {
-        if (!config.slides) return
-        for (const slide of config.slides) {
-            const fonts = identifyFontsUsed(slide.textLayers)
-            for (const fontConfig of fonts) {
-                if (!loadedFonts.has(fontConfig.key)) {
-                    addGoogleFontIntoHtmlHead(fontConfig)
-                    loadedFonts.add(fontConfig.key)
-                }
-            }
+        if (who==='yourself'){
+            getFarcasterProfiles([farId]).then(user=>setAllUser(user))
         }
     }, [who])
 
@@ -36,9 +33,20 @@ export default function Inspector() {
                         updateConfig({ who })
                     }}
                 >
-                    <option value="yourself">Yourself</option>
+                    <option value="yourself">Yourself {`(${farName})`}</option>
                     <option value="someone">Someone else</option>
                 </Select>
+                {/* {allUser[0].verifications} */}
+                {who==='yourself' && allUser.length>0 && <>
+                                <h2 className="text-lg font-semibold">Pick Address to Send to</h2>
+                                <Select
+                   
+                >
+                    <option value={allUser[0].custody_address}>{allUser[0].custody_address}</option>
+                    <option value={allUser[0].verifications}>{allUser[0].verifications}</option>
+                 
+                </Select>
+                </>}
                 {config.who === 'someone' && <Input
                     className="py-2 text-lg"
                     placeholder="username"

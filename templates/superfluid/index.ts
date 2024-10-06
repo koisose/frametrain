@@ -2,9 +2,9 @@ import type { BaseConfig, BaseStorage, BaseTemplate } from '@/lib/types'
 import Inspector from './Inspector'
 import cover from './cover.webp'
 import handlers from './handlers'
-
+import type {  FarcasterUserInfo } from '@/lib/farcaster'
 export interface Config extends BaseConfig {
-  
+  address:string
     who:string
 }
 
@@ -23,6 +23,7 @@ export default {
     handlers,
     initialConfig: {
         who: 'yourself',
+        address: ''
     },
     events: [],
 } satisfies BaseTemplate

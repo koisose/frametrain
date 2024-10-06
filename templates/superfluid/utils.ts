@@ -2,7 +2,7 @@ import type { FarcasterUserInfo } from '@/lib/farcaster'
 
 const NEYNAR_API_URL = 'https://api.neynar.com/v2'
 
-export async function getFarcasterProfiles(username: string): Promise<{ user: FarcasterUserInfo }> {
+export async function getFarcasterProfileByUsername(username: string): Promise<{ user: FarcasterUserInfo }> {
     const options = {
         method: 'GET',
         headers: {
