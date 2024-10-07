@@ -2,13 +2,15 @@ import type { BaseConfig, BaseStorage, BaseTemplate } from '@/lib/types'
 import Inspector from './Inspector'
 import cover from './cover.webp'
 import handlers from './handlers'
-import type {  FarcasterUserInfo } from '@/lib/farcaster'
+
 export interface Config extends BaseConfig {
-  address:string
-    who:string
+    address: string
+    who: string
+    profpic: string
+    username: string
 }
 
-export interface Storage extends BaseStorage {}
+export interface Storage extends BaseStorage { }
 
 export default {
     name: 'Superfluid',
@@ -22,8 +24,10 @@ export default {
     Inspector,
     handlers,
     initialConfig: {
-        who: 'yourself',
-        address: ''
+        who: '',
+        address: '',
+        profpic: '',
+        username: ''
     },
     events: [],
 } satisfies BaseTemplate
