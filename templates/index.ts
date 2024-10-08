@@ -18,8 +18,9 @@ import rss from './rss'
 import substack from './substack'
 import swap from './swap'
 import twitter from './twitter'
-
+import wishlistft from './wishlistft'
 export default {
+    wishlistft,
     pdf,
     poll,
     figma,
