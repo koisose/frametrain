@@ -18,8 +18,9 @@ import rss from './rss'
 import substack from './substack'
 import swap from './swap'
 import twitter from './twitter'
-
+import miniArticle from './mini-article'
 export default {
+    miniArticle,
     pdf,
     poll,
     figma,
