@@ -32,6 +32,6 @@ console.log(storage)
         ],
         aspectRatio: '1:1',
         component: PageView(config),
-        handler: 'page_next',
+        handler: 'page',
     }
 }

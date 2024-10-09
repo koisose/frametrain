@@ -8,7 +8,7 @@ import type { Config } from '.'
 export default function Inspector() {
     const [config, updateConfig] = useFrameConfig<Config>()
 
-    const { text } = config
+    const { fantokens } = config
 
     const displayLabelInputRef = useRef<HTMLInputElement>(null)
 
@@ -39,13 +39,15 @@ export default function Inspector() {
                     Add Fan Token
                 </Button>
             <h1 className="font-bold">Fan Token List</h1>
-            <div className="flex items-center justify-between">
-                <p>{config.text}</p>
-                <p>{config.text}</p>
+            {fantokens?.map(ft=><div className="flex items-center justify-between">
+                
+                <p>{ft.fantoken}</p>
+                <p>{ft.quantity}</p>
                 <Button className="h-full bg-red-500">
                     delete
                 </Button>
-            </div>
+            </div>)}
+            
             </Configuration.Section>
         </Configuration.Root>
     )

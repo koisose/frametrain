@@ -2,9 +2,12 @@ import type { BaseConfig, BaseStorage, BaseTemplate } from '@/lib/types'
 import Inspector from './Inspector'
 import cover from './cover.webp'
 import handlers from './handlers'
-
+type FanTokens={
+    fantoken:string
+    quantity:number
+}
 export interface Config extends BaseConfig {
-    text: string
+    fantokens: FanTokens[]
 }
 
 export interface Storage extends BaseStorage {}
@@ -21,7 +24,7 @@ export default {
     Inspector,
     handlers,
     initialConfig: {
-        text: 'Default Text',
+        fantokens: [],
     },
     events: [],
 } satisfies BaseTemplate

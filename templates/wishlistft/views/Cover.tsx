@@ -21,7 +21,7 @@ export default function CoverView(config: Config) {
         }}
       >
         <div>moxie fan token wishlist</div>
-        <div>i have 6 wish</div>
+        <div>i have 6 fan token wish</div>
         <div style={{ fontSize: 48 }}>
           click &apos;start&apos; to see my wishlist
         </div>
